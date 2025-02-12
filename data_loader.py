@@ -9,7 +9,7 @@ df1 = pd.read_excel(file_path)
 # df2 = pd.read_excel(file_path_1)
 
 # Display the first few rows
-print(df1.head())
+print(df1.describe())
 
 
 
