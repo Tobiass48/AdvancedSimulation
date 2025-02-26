@@ -65,8 +65,13 @@ class BangladeshModel(Model):
         self.sources = []
         self.sinks = []
         self.generate_model()
+
         self.datacollector = DataCollector(
             agent_reporters={
+                "GeneratedAtStep": lambda a: a.generated_at_step if isinstance(a, Vehicle) else None,
+                "RemovedAtStep": lambda a: a.removed_at_step if isinstance(a, Vehicle) else None
+            },
+            model_reporters={
                 "GeneratedAtStep": lambda a: a.generated_at_step if isinstance(a, Vehicle) else None,
                 "RemovedAtStep": lambda a: a.removed_at_step if isinstance(a, Vehicle) else None
             }
