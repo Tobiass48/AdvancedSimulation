@@ -1,7 +1,8 @@
 from mesa import Model
 from mesa.time import BaseScheduler
+from mesa import DataCollector
 from mesa.space import ContinuousSpace
-from components import Source, Sink, SourceSink, Bridge, Link
+from components import Source, Sink, SourceSink, Bridge, Link, Vehicle
 import pandas as pd
 from collections import defaultdict
 
@@ -63,8 +64,13 @@ class BangladeshModel(Model):
         self.space = None
         self.sources = []
         self.sinks = []
-
         self.generate_model()
+        self.datacollector = DataCollector(
+            agent_reporters={
+                "GeneratedAtStep": lambda a: a.generated_at_step if isinstance(a, Vehicle) else None,
+                "RemovedAtStep": lambda a: a.removed_at_step if isinstance(a, Vehicle) else None
+            }
+        )
 
     def generate_model(self):
         """
@@ -73,6 +79,7 @@ class BangladeshModel(Model):
         Warning: the labels are the same as the csv column labels
         """
 
+        # df = pd.read_csv('../data/cleaned_data/infrastructure/BMMS_overview.xlsx')
         df = pd.read_csv('../data/demo-1.csv')
 
         # a list of names of roads to be generated
@@ -163,6 +170,7 @@ class BangladeshModel(Model):
         Advance the simulation by one step.
         """
         self.schedule.step()
+        self.datacollector.collect(self)
 
 
 # EOF -----------------------------------------------------------
