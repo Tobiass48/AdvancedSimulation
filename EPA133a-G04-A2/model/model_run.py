@@ -26,6 +26,5 @@ print("SEED " + str(sim_model._seed))
 for i in range(run_length):
     sim_model.step()
 
-model_results = sim_model.datacollector.get_model_vars_dataframe()
 agent_results = sim_model.datacollector.get_agent_vars_dataframe()  # Get agent data
 agent_results.to_csv("MESA_filtered_output.csv", index=False)

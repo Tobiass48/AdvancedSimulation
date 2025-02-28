@@ -68,10 +68,6 @@ class BangladeshModel(Model):
             agent_reporters={
                 "GeneratedAtStep": lambda a: a.generated_at_step if isinstance(a, Vehicle) else None,
                 "RemovedAtStep": lambda a: a.removed_at_step if isinstance(a, Vehicle) else None
-            },
-            model_reporters={
-                "GeneratedAtStep": lambda a: a.generated_at_step if isinstance(a, Vehicle) else None,
-                "RemovedAtStep": lambda a: a.removed_at_step if isinstance(a, Vehicle) else None
             }
         )
 
