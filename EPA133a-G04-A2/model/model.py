@@ -28,9 +28,9 @@ def set_lat_lon_bound(lat_min, lat_max, lon_min, lon_max, edge_ratio=0.02):
 
 # ---------------------------------------------------------------
 class BangladeshModel(Model):
+
     """
     The main (top-level) simulation model
-
     One tick represents one minute; this can be changed
     but the distance calculation need to be adapted accordingly
 
@@ -38,7 +38,6 @@ class BangladeshModel(Model):
     -----------------
     step_time: int
         step_time = 1 # 1 step is 1 min
-
     path_ids_dict: defaultdict
         Key: (origin, destination)
         Value: the shortest path (Infra component IDs) from an origin to a destination
@@ -51,7 +50,6 @@ class BangladeshModel(Model):
 
     sinks: list
         all sinks in the network
-
     """
 
     step_time = 1
@@ -84,7 +82,7 @@ class BangladeshModel(Model):
         Warning: the labels are the same as the csv column labels
         """
 
-        # df = pd.read_csv('../data/cleaned_data/infrastructure/BMMS_overview.xlsx')
+        # df = pd.read_csv('../data/demo-1.csv')
         df = pd.read_csv("../data/cleaned_data/infrastructure/roads_for_model.csv")
 
         # a list of names of roads to be generated
