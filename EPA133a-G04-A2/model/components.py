@@ -1,5 +1,6 @@
 from mesa import Agent
 from enum import Enum
+import random
 
 
 # ---------------------------------------------------------------
@@ -103,7 +104,7 @@ class Bridge(Infra):
 
     def finish_repair(self):
         # change the condition when the counter is zero
-        self.condition("A")
+        self.condition = "A"
         self.in_repair = False
         self.delay_time = 0
         self.repair_time = 24*60
