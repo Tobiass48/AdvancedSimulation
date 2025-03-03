@@ -57,13 +57,62 @@ class Bridge(Infra):
         self.condition = condition
 
         # TODO
-        self.delay_time = self.random.randrange(0, 10)
+        self.collapse_prob = self.model.scenario_prob.get(self.condition, 0.0)
+        self.repair_time = 24*60 # repair takes one day
+        self.in_repair = False
+        self.delay_time = 0
+
+        # self.delay_time = self.random.randrange(0, 10)
         # print(self.delay_time)
 
     # TODO
     def get_delay_time(self):
+        if self.condition == "Collapsed" and self.delay_time == 0:
+            if self.length > self.model.long_length_threshold:
+                self.delay_time = random.triangular(60, 240, 120)
+            elif self.length > self.model.medium_length_threshold:
+                self.delay_time = random.uniform(45, 90)
+            elif self.length > self.model.short_length_threshold:
+                self.delay_time = random.uniform(15, 60)
+            else:
+                self.delay_time = random.uniform(10, 20)
+        else:
+            pass
         return self.delay_time
 
+    def get_name(self):
+        return self.name # get bridge name to choose between L/R
+
+    def collapse(self):
+        if not self.in_repair and self.collapse_prob > random.random():
+            self.condition = "Collapsed"
+
+    def check_repair(self):
+        # if the bridge is not yet in repair, but collapsed, change repair status
+        if not self.in_repair and self.condition == "Collapsed":
+            self.in_repair = True
+            self.delay_time = self.get_delay_time()
+        # check if its repair time is done if bridge is in repair
+        elif self.in_repair:
+            if self.repair_time == 0:
+                self.finish_repair()
+            else:
+                # if the counter is not zero, condition is still collapsed. Counter is decreased with one.
+                self.repair_time -= 1
+        return
+
+    def finish_repair(self):
+        # change the condition when the counter is zero
+        self.condition("A")
+        self.in_repair = False
+        self.delay_time = 0
+        self.repair_time = 24*60
+
+    def step(self):
+        # the bridge has a chance to collapse thru the collapse function
+        self.collapse()
+        # check if bridge needs repair and if repair is finished
+        self.check_repair()
 
 # ---------------------------------------------------------------
 class Link(Infra):
