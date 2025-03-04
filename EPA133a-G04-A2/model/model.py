@@ -4,8 +4,6 @@ from mesa.space import ContinuousSpace
 from components import Source, Sink, SourceSink, Bridge, Link
 import pandas as pd
 from collections import defaultdict
-from statistics import mean
-from mesa.datacollection import DataCollector
 
 
 # ---------------------------------------------------------------
@@ -26,18 +24,6 @@ def set_lat_lon_bound(lat_min, lat_max, lon_min, lon_max, edge_ratio=0.02):
     y_min = lat_max + lat_edge
     return y_min, y_max, x_min, x_max
 
-def get_steps(model):
-    return model.schedule.steps
-
-def get_avg_delay(model):
-    delays = [a.delay_time for a in model.schedule.agents if isinstance(a,Bridge)]
-    return mean(delays)
-
-def get_avg_driving(model):
-    if len(model.trucks_driving_time) > 0:
-        return sum(model.trucks_driving_time) / len(model.trucks_driving_time)
-    else:
-        return 0
 
 # ---------------------------------------------------------------
 class BangladeshModel(Model):
@@ -69,8 +55,7 @@ class BangladeshModel(Model):
 
     step_time = 1
 
-    def __init__(self, seed=None, x_max=500, y_max=500, x_min=0, y_min=0,
-                 scenario_prob={'A': 0, 'B': 0, 'C': 0, 'D': 0}):
+    def __init__(self, seed=None, x_max=500, y_max=500, x_min=0, y_min=0):
 
         self.schedule = BaseScheduler(self)
         self.running = True
@@ -78,17 +63,8 @@ class BangladeshModel(Model):
         self.space = None
         self.sources = []
         self.sinks = []
-        self.scenario_prob = scenario_prob
-        self.trucks_driving_time = []  # list to collect trucks driving times
-
-        # length threshold for bridges initialization
-        self.long_length_threshold = 200
-        self.medium_length_threshold = 50
-        self.short_length_threshold = 10
 
         self.generate_model()
-
-
 
     def generate_model(self):
         """
@@ -171,16 +147,6 @@ class BangladeshModel(Model):
                     self.space.place_agent(agent, (x, y))
                     agent.pos = (x, y)
 
-            # defining the metrics that want to get for each model run
-            metrics = {
-                "step": get_steps,
-                "avg_delay": get_avg_delay,
-                "avg_driving_time": get_avg_driving
-            }
-
-            # data collector
-            self.datacollector = DataCollector(model_reporters=metrics)
-
     def get_random_route(self, source):
         """
         pick up a random route given an origin
@@ -196,8 +162,6 @@ class BangladeshModel(Model):
         """
         Advance the simulation by one step.
         """
-        # collect the model data and add them to the results table
-        self.datacollector.collect(self)
         self.schedule.step()
 
 
