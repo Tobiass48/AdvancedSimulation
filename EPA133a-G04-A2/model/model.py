@@ -63,8 +63,13 @@ class BangladeshModel(Model):
         self.space = None
         self.sources = []
         self.sinks = []
-
         self.generate_model()
+        self.datacollector = DataCollector(
+            agent_reporters={
+                "GeneratedAtStep": lambda a: a.generated_at_step if isinstance(a, Vehicle) else None,
+                "RemovedAtStep": lambda a: a.removed_at_step if isinstance(a, Vehicle) else None
+            }
+        )
 
     def generate_model(self):
         """
@@ -163,6 +168,7 @@ class BangladeshModel(Model):
         Advance the simulation by one step.
         """
         self.schedule.step()
+        self.datacollector.collect(self)
 
 
 # EOF -----------------------------------------------------------
