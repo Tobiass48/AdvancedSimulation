@@ -1,5 +1,5 @@
 road,lat,lon,model_type,name,length,id
-N1,23.7060278,90.443333,link,Start of Road  after Jatrabari Flyover infront of filling station.,0.0,1000000
+N1,23.7060278,90.443333,source,Start of Road  after Jatrabari Flyover infront of filling station.,0.0,1000000
 N1,23.7029167,90.4504167,link,Box Culvert,0.814,1000001
 N1,23.7027778,90.4504722,link,Intersection with Z1101,0.008000000000000007,1000002
 N1,23.7021389,90.4519722,link,Km post missing,0.17800000000000005,1000003
@@ -51346,4 +51346,4 @@ Z8943,22.4294993,90.7857219,link,Km Post Missing,0.258,1051343
 Z8943,22.4301104,90.7763327,link,Km Post Missing,1.0,1051344
 Z8943,22.4302493,90.7748882,bridge,Start of Bridge,0.13299999999999912,1051345
 Z8943,22.4302493,90.7748604,bridge,End of Bridge,0.018000000000000682,1051346
-Z8943,22.430166,90.768916,link,"End at Kunjerhat Bazar and intersct with R890, Borhanuddin",0.6490000000000009,1051347
+Z8943,22.430166,90.768916,sink,"End at Kunjerhat Bazar and intersct with R890, Borhanuddin",0.6490000000000009,1051347
