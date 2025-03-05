@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc545e08-8880-4fe2-97f0-c9f3ac770536" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/AdvancedSimulation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AdvancedSimulation.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A2/model/data_transformer.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A2/model/data_transformer.ipynb" afterDir="false" />
-    </list>
+    <list default="true" id="cc545e08-8880-4fe2-97f0-c9f3ac770536" name="Changes" comment="Forced goede working directory jupyter notebook" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -248,6 +243,15 @@
       <workItem from="1741171173613" duration="394000" />
       <workItem from="1741171595441" duration="1302000" />
     </task>
+    <task id="LOCAL-00001" summary="Forced goede working directory jupyter notebook">
+      <option name="closed" value="true" />
+      <created>1741202630314</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1741202630314</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,6 +267,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Forced goede working directory jupyter notebook" />
+    <option name="LAST_COMMIT_MESSAGE" value="Forced goede working directory jupyter notebook" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AdvancedSimulation$model_run.coverage" NAME="model_run Coverage Results" MODIFIED="1741171397751" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-G04-A2/model" />
