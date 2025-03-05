@@ -1,5 +1,6 @@
 from mesa import Agent
 from enum import Enum
+import random
 
 
 # ---------------------------------------------------------------
@@ -20,12 +21,14 @@ class Infra(Agent):
     """
 
     def __init__(self, unique_id, model, length=0,
-                 name='Unknown', road_name='Unknown'):
+                 name='Unknown', road_name='Unknown', condition='Unknown'):
         super().__init__(unique_id, model)
         self.length = length
         self.name = name
         self.road_name = road_name
         self.vehicle_count = 0
+        self.condition = condition
+
 
     def step(self):
         pass
@@ -52,17 +55,47 @@ class Bridge(Infra):
 
     def __init__(self, unique_id, model, length=0,
                  name='Unknown', road_name='Unknown', condition='Unknown'):
-        super().__init__(unique_id, model, length, name, road_name)
+        super().__init__(unique_id, model, length, name, road_name, condition)
 
+
+        print(f"Bridge condition: {self.condition}")
         self.condition = condition
+        self.length = length
+        self.name = name
+        self.road_name = road_name
 
-        # TODO
-        self.delay_time = self.random.randrange(0, 10)
-        # print(self.delay_time)
+        # Assign breakdown probability based on bridge condition (A, B, C, D)
+        self.breakdown_prob = model.breakdown_probs.get(self.condition, 0)
+        #print(f"Bridge Condition: {self.condition}, Breakdown Probability: {self.breakdown_prob}")
 
-    # TODO
+        self.broken = False
+        self.delay_time = 0  # Default to no delay
+
+        # Determine if bridge breaks down based on probability
+        if random.random() < self.breakdown_prob:
+            self.broken = True
+            self.assign_delay()
+
+        print(self.delay_time)  # Debugging Output
+
+    def assign_delay(self):
+        """Assign delay time based on bridge length if broken"""
+        if self.length > 200:
+            self.delay_time = random.triangular(1, 2, 4) * 60  # Convert hours to minutes
+        elif 50 < self.length <= 200:
+            self.delay_time = random.uniform(45, 90)
+        elif 10 < self.length <= 50:
+            self.delay_time = random.uniform(15, 60)
+        else:
+            self.delay_time = random.uniform(10, 20)
+
+    def get_delay(self):
+        """Return the delay time if the bridge is broken, otherwise return 0"""
+        return self.delay_time if self.broken else 0
+
     def get_delay_time(self):
-        return self.delay_time
+        """Alias for get_delay()"""
+        return self.get_delay()
 
 
 # ---------------------------------------------------------------
@@ -150,51 +183,11 @@ class SourceSink(Source, Sink):
 # ---------------------------------------------------------------
 class Vehicle(Agent):
     """
-
-    Attributes
-    __________
-    speed: float
-        speed in meter per minute (m/min)
-
-    step_time: int
-        the number of minutes (or seconds) a tick represents
-        Used as a base to change unites
-
-    state: Enum (DRIVE | WAIT)
-        state of the vehicle
-
-    location: Infra
-        reference to the Infra where the vehicle is located
-
-    location_offset: float
-        the location offset in meters relative to the starting point of
-        the Infra, which has a certain length
-        i.e. location_offset < length
-
-    path_ids: Series
-        the whole path (origin and destination) where the vehicle shall drive
-        It consists the Infras' uniques IDs in a sequential order
-
-    location_index: int
-        a pointer to the current Infra in "path_ids" (above)
-        i.e. the id of self.location is self.path_ids[self.location_index]
-
-    waiting_time: int
-        the time the vehicle needs to wait
-
-    generated_at_step: int
-        the timestamp (number of ticks) that the vehicle is generated
-
-    removed_at_step: int
-        the timestamp (number of ticks) that the vehicle is removed
-    ...
-
+    Represents a vehicle moving through the infrastructure.
     """
 
-    # 50 km/h translated into meter per min
-    speed = 50 * 1000 / 60
-    # One tick represents 1 minute
-    step_time = 1
+    speed = 50 * 1000 / 60  # Speed in meters per minute
+    step_time = 1  # One tick represents 1 minute
 
     class State(Enum):
         DRIVE = 1
@@ -209,7 +202,6 @@ class Vehicle(Agent):
         self.location_offset = location_offset
         self.pos = generated_by.pos
         self.path_ids = path_ids
-        # default values
         self.state = Vehicle.State.DRIVE
         self.location_index = 0
         self.waiting_time = 0
@@ -217,20 +209,17 @@ class Vehicle(Agent):
         self.removed_at_step = None
 
     def __str__(self):
-        return "Vehicle" + str(self.unique_id) + \
-               " +" + str(self.generated_at_step) + " -" + str(self.removed_at_step) + \
-               " " + str(self.state) + '(' + str(self.waiting_time) + ') ' + \
-               str(self.location) + '(' + str(self.location.vehicle_count) + ') ' + str(self.location_offset)
+        return f"Vehicle{self.unique_id} +{self.generated_at_step} -{self.removed_at_step} {self.state}({self.waiting_time}) {self.location}({self.location.vehicle_count}) {self.location_offset}"
 
     def set_path(self):
         """
-        Set the origin destination path of the vehicle
+        Set the origin-destination path of the vehicle.
         """
         self.path_ids = self.model.get_random_route(self.generated_by.unique_id)
 
     def step(self):
         """
-        Vehicle waits or drives at each step
+        Vehicle waits or drives at each step.
         """
         if self.state == Vehicle.State.WAIT:
             self.waiting_time = max(self.waiting_time - 1, 0)
@@ -241,59 +230,50 @@ class Vehicle(Agent):
         if self.state == Vehicle.State.DRIVE:
             self.drive()
 
-        """
-        To print the vehicle trajectory at each step
-        """
         print(self)
 
     def drive(self):
-
-        # the distance that vehicle drives in a tick
-        # speed is global now: can change to instance object when individual speed is needed
+        """
+        Moves the vehicle forward in its path.
+        """
         distance = Vehicle.speed * Vehicle.step_time
         distance_rest = self.location_offset + distance - self.location.length
 
         if distance_rest > 0:
-            # go to the next object
             self.drive_to_next(distance_rest)
         else:
-            # remain on the same object
             self.location_offset += distance
 
     def drive_to_next(self, distance):
         """
-        vehicle shall move to the next object with the given distance
+        Moves the vehicle to the next infrastructure component.
         """
-
         self.location_index += 1
         next_id = self.path_ids[self.location_index]
-        next_infra = self.model.schedule._agents[next_id]  # Access to protected member _agents
+        next_infra = self.model.schedule._agents[next_id]
 
         if isinstance(next_infra, Sink):
-            # arrive at the sink
             self.arrive_at_next(next_infra, 0)
             self.removed_at_step = self.model.schedule.steps
+            self.model.travel_time.append(self.removed_at_step - self.generated_at_step)
             self.location.remove(self)
             return
+
         elif isinstance(next_infra, Bridge):
             self.waiting_time = next_infra.get_delay_time()
             if self.waiting_time > 0:
-                # arrive at the bridge and wait
                 self.arrive_at_next(next_infra, 0)
                 self.state = Vehicle.State.WAIT
                 return
-            # else, continue driving
 
         if next_infra.length > distance:
-            # stay on this object:
             self.arrive_at_next(next_infra, distance)
         else:
-            # drive to next object:
             self.drive_to_next(distance - next_infra.length)
 
     def arrive_at_next(self, next_infra, location_offset):
         """
-        Arrive at next_infra with the given location_offset
+        Arrive at next_infra with the given location_offset.
         """
         self.location.vehicle_count -= 1
         self.location = next_infra

@@ -6,20 +6,28 @@ from model import BangladeshModel
 """
 
 # ---------------------------------------------------------------
+# Run time: 5 days x 24 hours x 60 minutes = 5 * 24 * 60
+# Adjusted to match the assignment requirement
+run_length = 5 * 24 * 60  # Full 5-day simulation
 
-# run time 5 x 24 hours; 1 tick 1 minute
-# run_length = 5 * 24 * 60
+seed = 1234567  # Set the seed for reproducibility
 
-# run time 1000 ticks
-run_length = 1000
+# Initialize the simulation model
+sim_model = BangladeshModel(seed=seed, scenario=0, csv_output="scenario0.csv")
 
-seed = 1234567
-
-sim_model = BangladeshModel(seed=seed)
-
-# Check if the seed is set
+# Check if the seed is set correctly
 print("SEED " + str(sim_model._seed))
 
-# One run with given steps
+# Run the simulation for the specified number of steps
 for i in range(run_length):
     sim_model.step()
+
+# Collect the recorded data from DataCollector
+travel_data = sim_model.datacollector.get_model_vars_dataframe()
+
+# Save the output to CSV as required
+travel_data.to_csv(sim_model.csv_output)
+
+# Print final output summary
+print("Simulation complete. Results saved to:", sim_model.csv_output)
+print(travel_data.describe())  # Print summary statistics
