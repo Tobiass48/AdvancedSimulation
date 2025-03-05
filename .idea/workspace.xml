@@ -194,10 +194,10 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.model_run" />
-      <item itemvalue="Python.model (1)" />
       <item itemvalue="Python.A2 model_viz" />
+      <item itemvalue="Python.model (1)" />
       <item itemvalue="Python.model" />
+      <item itemvalue="Python.model_run" />
       <item itemvalue="Python.model_viz" />
     </list>
     <recent_temporary>
