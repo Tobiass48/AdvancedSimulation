@@ -4,6 +4,7 @@ from mesa.space import ContinuousSpace
 from components import Source, Sink, SourceSink, Bridge, Link
 import pandas as pd
 from collections import defaultdict
+from mesa.datacollection import DataCollector
 
 
 # ---------------------------------------------------------------
@@ -63,9 +64,15 @@ class BangladeshModel(Model):
         self.space = None
         self.sources = []
         self.sinks = []
+
         self.generate_model()
+
         self.datacollector = DataCollector(
             agent_reporters={
+                "GeneratedAtStep": lambda a: a.generated_at_step if isinstance(a, Vehicle) else None,
+                "RemovedAtStep": lambda a: a.removed_at_step if isinstance(a, Vehicle) else None
+            },
+            model_reporters={
                 "GeneratedAtStep": lambda a: a.generated_at_step if isinstance(a, Vehicle) else None,
                 "RemovedAtStep": lambda a: a.removed_at_step if isinstance(a, Vehicle) else None
             }
@@ -168,7 +175,6 @@ class BangladeshModel(Model):
         Advance the simulation by one step.
         """
         self.schedule.step()
-        self.datacollector.collect(self)
 
 
 # EOF -----------------------------------------------------------
