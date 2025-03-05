@@ -24,3 +24,8 @@ print("SEED " + str(sim_model._seed))
 for i in range(run_length):
     sim_model.step()
 
+# Retrieve collected data
+agent_data = sim_model.datacollector.get_agent_vars_dataframe()
+model_data = sim_model.datacollector.get_model_vars_dataframe()
+
+agent_data.head()
