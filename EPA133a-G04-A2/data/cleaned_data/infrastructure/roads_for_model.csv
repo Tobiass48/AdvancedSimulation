@@ -1,7 +1,7 @@
-road,lat,lon,model_type,name,length,id
-N1,23.7060278,90.443333,source,Start of Road  after Jatrabari Flyover infront of filling station.,0.0,1000000
-N1,23.7029167,90.4504167,bridge,Box Culvert,0.814,1000001
-N1,23.7027778,90.4504722,link,Intersection with Z1101,0.008000000000000007,1000002
+road,lat,lon,model_type,name,length,id,condition
+N1,23.7060278,90.443333,source,Start of Road  after Jatrabari Flyover infront of filling station.,0.0,1000000, A
+N1,23.7029167,90.4504167,bridge,Box Culvert,0.814,1000001, B
+N1,23.7027778,90.4504722,link,Intersection with Z1101,0.008000000000000007,1000002, A
 N1,23.7021389,90.4519722,link,Km post missing,0.17800000000000005,1000003
 N1,23.6978886,90.4605833,link,Km post missing,1.0,1000004
 N1,23.6973608,90.4616667,bridge,Box culvert,0.1299999999999999,1000005

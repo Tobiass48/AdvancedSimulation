@@ -1,4 +1,6 @@
 from model import BangladeshModel
+import numpy as np
+import pandas as pd
 
 """
     Run simulation
@@ -6,28 +8,31 @@ from model import BangladeshModel
 """
 
 # ---------------------------------------------------------------
-# Run time: 5 days x 24 hours x 60 minutes = 5 * 24 * 60
-# Adjusted to match the assignment requirement
-run_length = 5 * 24 * 60  # Full 5-day simulation
 
-seed = 1234567  # Set the seed for reproducibility
+# run time 5 x 24 hours; 1 tick 1 minute
+run_length = 7200
 
-# Initialize the simulation model
-sim_model = BangladeshModel(seed=seed, scenario=0, csv_output="scenario0.csv")
+scenario = {
+    0: {'A': 0.0, 'B': 0.0, 'C': 0.0, 'D': 0.0},
+    1: {'A': 0.0, 'B': 0.0, 'C': 0.0, 'D': 0.05},
+    2: {'A': 0.0, 'B': 0.0, 'C': 0.0, 'D': 0.10},
+    3: {'A': 0.0, 'B': 0.0, 'C': 0.05, 'D': 0.10},
+    4: {'A': 0.0, 'B': 0.0, 'C': 0.10, 'D': 0.20},
+    5: {'A': 0.0, 'B': 0.05, 'C': 0.10, 'D': 0.20},
+    6: {'A': 0.0, 'B': 0.10, 'C': 0.20, 'D': 0.40},
+    7: {'A': 0.05, 'B': 0.10, 'C': 0.20, 'D': 0.40},
+    8: {'A': 0.10, 'B': 0.20, 'C': 0.40, 'D': 0.80}
+}
 
-# Check if the seed is set correctly
-print("SEED " + str(sim_model._seed))
+scenario_choice = 3
 
-# Run the simulation for the specified number of steps
+seed = np.random.randint(100000, 999999)
+sim_model = BangladeshModel(seed=int(seed), breakdown_probabilities=scenario, scenario=scenario_choice)
+
+
 for i in range(run_length):
     sim_model.step()
 
-# Collect the recorded data from DataCollector
-travel_data = sim_model.datacollector.get_model_vars_dataframe()
+sim_model.save_data(f'scenario{scenario_choice}_seed{seed}.csv')  # Save collected data
 
-# Save the output to CSV as required
-travel_data.to_csv(sim_model.csv_output)
-
-# Print final output summary
-print("Simulation complete. Results saved to:", sim_model.csv_output)
-print(travel_data.describe())  # Print summary statistics
+print(f"Simulation completed for scenario {scenario_choice}. Data saved.")

@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc545e08-8880-4fe2-97f0-c9f3ac770536" name="Changes" comment="">
+    <list default="true" id="cc545e08-8880-4fe2-97f0-c9f3ac770536" name="Changes" comment="Working files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A2/data/demo-1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A2/data/demo-1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A2/data/cleaned_data/infrastructure/roads_for_model.csv" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A2/data/cleaned_data/infrastructure/roads_for_model.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EPA133a-G04-A2/model/components.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A2/model/components.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EPA133a-G04-A2/model/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A2/model/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EPA133a-G04-A2/model/model_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A2/model/model_run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-Lab_william/EPA133a-Gxx-A2/model/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-Lab_william/EPA133a-Gxx-A2/model/model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +110,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="components" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AdvancedSimulation" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/EPA133a-G04-A2/model" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EPA133a-G04-A2/model/components.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="model (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AdvancedSimulation" />
       <option name="ENV_FILES" value="" />
@@ -124,29 +148,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EPA133a-Lab_william/EPA133a-Gxx-A2/model/model.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AdvancedSimulation" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/EPA133a-G04-A2/model" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EPA133a-G04-A2/model/model.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -206,8 +207,8 @@
         <item itemvalue="Python.model_run" />
         <item itemvalue="Python.A2 model_viz" />
         <item itemvalue="Python.model_viz" />
+        <item itemvalue="Python.components" />
         <item itemvalue="Python.model (1)" />
-        <item itemvalue="Python.model" />
       </list>
     </recent_temporary>
   </component>
@@ -245,19 +246,34 @@
       <workItem from="1741170457640" duration="182000" />
       <workItem from="1741170672021" duration="383000" />
       <workItem from="1741171173613" duration="394000" />
-      <workItem from="1741171595441" duration="7454000" />
+      <workItem from="1741171595441" duration="22299000" />
+      <workItem from="1741198038559" duration="1157000" />
+      <workItem from="1741207415436" duration="6838000" />
     </task>
+    <task id="LOCAL-00001" summary="Working files">
+      <option name="closed" value="true" />
+      <created>1741180510426</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1741180510426</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Working files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working files" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/AdvancedSimulation$model_run.coverage" NAME="model_run Coverage Results" MODIFIED="1741179660848" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-G04-A2/model" />
-    <SUITE FILE_PATH="coverage/AdvancedSimulation$model_viz.coverage" NAME="model_viz Coverage Results" MODIFIED="1741172272963" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-Lab_william/EPA133a-Gxx-A2/model" />
+    <SUITE FILE_PATH="coverage/AdvancedSimulation$model_run.coverage" NAME="model_run Coverage Results" MODIFIED="1741214367749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-G04-A2/model" />
+    <SUITE FILE_PATH="coverage/AdvancedSimulation$model_viz.coverage" NAME="model_viz Coverage Results" MODIFIED="1741195955167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-Lab_william/EPA133a-Gxx-A2/model" />
     <SUITE FILE_PATH="coverage/AdvancedSimulation$model.coverage" NAME="model Coverage Results" MODIFIED="1741171973166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-G04-A2/model" />
-    <SUITE FILE_PATH="coverage/AdvancedSimulation$components.coverage" NAME="components Coverage Results" MODIFIED="1741171758462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-G04-A2/model" />
-    <SUITE FILE_PATH="coverage/AdvancedSimulation$A2_model_viz.coverage" NAME="A2 model_viz Coverage Results" MODIFIED="1741180285911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-G04-A2/model" />
+    <SUITE FILE_PATH="coverage/AdvancedSimulation$components.coverage" NAME="components Coverage Results" MODIFIED="1741194644735" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-G04-A2/model" />
+    <SUITE FILE_PATH="coverage/AdvancedSimulation$A2_model_viz.coverage" NAME="A2 model_viz Coverage Results" MODIFIED="1741211638882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-G04-A2/model" />
     <SUITE FILE_PATH="coverage/AdvancedSimulation$model_run__1_.coverage" NAME="model_run (1) Coverage Results" MODIFIED="1741171520586" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-Lab_william/EPA133a-Gxx-A2/model" />
     <SUITE FILE_PATH="coverage/AdvancedSimulation$model__1_.coverage" NAME="model (1) Coverage Results" MODIFIED="1741172267601" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-Lab_william/EPA133a-Gxx-A2/model" />
     <SUITE FILE_PATH="coverage/AdvancedSimulation$A2_model_viz__1_.coverage" NAME="A2 model_viz (1) Coverage Results" MODIFIED="1741171229121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-G04-A2/model" />
