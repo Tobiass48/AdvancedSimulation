@@ -175,6 +175,7 @@ class BangladeshModel(Model):
         Advance the simulation by one step.
         """
         self.schedule.step()
+        self.datacollector.collect(self)
 
 
 # EOF -----------------------------------------------------------
