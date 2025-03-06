@@ -82,10 +82,9 @@ class BangladeshModel(Model):
                 "Average_driving_time": lambda m: m.get_average_driving_time(),
                 "Total_waiting_time": lambda m: m.get_total_delay_time(),
                 "Average_waiting_time": lambda m: m.get_average_delay_time(),
-                "Broken_bridges": lambda m: ', '.join(m.get_broken_bridges())  # Convert list to string
+               # "Broken_bridges": lambda m: ', '.join(m.get_broken_bridges())  # Convert list to string
             }
         )
-
 
         self.generate_model()
         self.broken_bridges = self.determine_broken_bridges()  # stores broken bridge IDs

@@ -1,6 +1,7 @@
 from model import BangladeshModel
 import numpy as np
 import pandas as pd
+import os
 
 """
     Run simulation
@@ -24,16 +25,22 @@ scenario = {
     8: {'A': 0.10, 'B': 0.20, 'C': 0.40, 'D': 0.80}
 }
 
-scenario_choice = 0
+scenario_choice = 8
 
 seed = 1234567
 #np.random.randint(100000, 999999)
+output_folder = "../data/result"
+os.makedirs(output_folder, exist_ok=True)
+
+#  Initialize the simulation model
 sim_model = BangladeshModel(seed=int(seed), breakdown_probabilities=scenario, scenario=scenario_choice)
 
-
-for i in range(run_length):
+#  Run simulation
+for _ in range(run_length):
     sim_model.step()
 
-sim_model.save_data(f'scenario{scenario_choice}.csv')  # Save collected data
+#  Save data in the `../data/` folder
+output_file = os.path.join(output_folder, f"scenario{scenario_choice}.csv")
+sim_model.save_data(output_file)
 
-print(f"Simulation completed for scenario {scenario_choice}. Data saved.")
+print(f"Simulation completed for scenario {scenario_choice}. Data saved in {output_file}.")
