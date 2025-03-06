@@ -1,6 +1,6 @@
 from mesa import Agent
 from enum import Enum
-
+import random
 
 # ---------------------------------------------------------------
 class Infra(Agent):
@@ -22,7 +22,7 @@ class Infra(Agent):
     def __init__(self, unique_id, model, length=0,
                  name='Unknown', road_name='Unknown'):
         super().__init__(unique_id, model)
-        self.length = length
+        self.length = length * 1000 #convert to meters
         self.name = name
         self.road_name = road_name
         self.vehicle_count = 0
@@ -50,19 +50,24 @@ class Bridge(Infra):
 
     """
 
-    def __init__(self, unique_id, model, length=0,
-                 name='Unknown', road_name='Unknown', condition='Unknown'):
+    def __init__(self, unique_id, model, condition, length=0,
+                 name='Unknown', road_name='Unknown'):
         super().__init__(unique_id, model, length, name, road_name)
 
+
         self.condition = condition
+        self.breakdown_probabilities = model.breakdown_probabilities
 
-        # TODO
-        self.delay_time = self.random.randrange(0, 10)
-        # print(self.delay_time)
 
-    # TODO
-    def get_delay_time(self):
-        return self.delay_time
+    def get_delay_time(self): # in minutes
+        if self.length < 10:
+            return random.uniform(10, 20)
+        elif 10 <= self.length < 50:
+            return random.uniform(15, 60)
+        elif 50 <= self.length < 200:
+            return random.uniform(45, 90)
+        elif self.length >= 200:
+            return random.triangular(60, 120, 240)
 
 
 # ---------------------------------------------------------------
@@ -85,9 +90,15 @@ class Sink(Infra):
     vehicle_removed_toggle = False
 
     def remove(self, vehicle):
-        self.model.schedule.remove(vehicle)
-        self.vehicle_removed_toggle = not self.vehicle_removed_toggle
-        print(str(self) + ' REMOVE ' + str(vehicle))
+        if vehicle in self.model.schedule.agents:
+            self.model.schedule.remove(vehicle)
+            self.vehicle_removed_toggle = not self.vehicle_removed_toggle
+            print(str(self) + ' REMOVE ' + str(vehicle))
+
+
+            # Store the driving time of this vehicle
+            driving_time = vehicle.removed_at_step - vehicle.generated_at_step
+            self.model.driving_times.append(driving_time)
 
 
 # ---------------------------------------------------------------
@@ -116,7 +127,7 @@ class Source(Infra):
     generation_frequency = 5
     vehicle_generated_flag = False
 
-    def step(self):
+    def step(self): # generate new truck every 5
         if self.model.schedule.steps % self.generation_frequency == 0:
             self.generate_truck()
         else:
@@ -191,8 +202,8 @@ class Vehicle(Agent):
 
     """
 
-    # 50 km/h translated into meter per min
-    speed = 50 * 1000 / 60
+    # 48 km/h translated into meter per min
+    speed = 48 * 1000 / 60
     # One tick represents 1 minute
     step_time = 1
 
@@ -204,7 +215,7 @@ class Vehicle(Agent):
                  location_offset=0, path_ids=None):
         super().__init__(unique_id, model)
         self.generated_by = generated_by
-        self.generated_at_step = model.schedule.steps
+        self.generated_at_step = model.schedule.steps # store start time here
         self.location = generated_by
         self.location_offset = location_offset
         self.pos = generated_by.pos
@@ -234,6 +245,8 @@ class Vehicle(Agent):
         """
         if self.state == Vehicle.State.WAIT:
             self.waiting_time = max(self.waiting_time - 1, 0)
+
+            self.model.total_wait_time += 1 # add 1 min to waiting time
             if self.waiting_time == 0:
                 self.waited_at = self.location
                 self.state = Vehicle.State.DRIVE
@@ -260,36 +273,54 @@ class Vehicle(Agent):
             # remain on the same object
             self.location_offset += distance
 
+
     def drive_to_next(self, distance):
         """
         vehicle shall move to the next object with the given distance
         """
 
-        self.location_index += 1
-        next_id = self.path_ids[self.location_index]
-        next_infra = self.model.schedule._agents[next_id]  # Access to protected member _agents
+        while True:
+            # move to the nect infrastructure in the vehicles path
+            self.location_index += 1
+            next_id = self.path_ids[self.location_index]
+            next_infra = self.model.schedule._agents[next_id]
 
-        if isinstance(next_infra, Sink):
-            # arrive at the sink
-            self.arrive_at_next(next_infra, 0)
-            self.removed_at_step = self.model.schedule.steps
-            self.location.remove(self)
-            return
-        elif isinstance(next_infra, Bridge):
-            self.waiting_time = next_infra.get_delay_time()
-            if self.waiting_time > 0:
-                # arrive at the bridge and wait
+            # if the vehicle reaches sink, remove it
+            if isinstance(next_infra, Sink):
                 self.arrive_at_next(next_infra, 0)
-                self.state = Vehicle.State.WAIT
+                self.removed_at_step = self.model.schedule.steps
+                self.location.remove(self)
                 return
-            # else, continue driving
 
-        if next_infra.length > distance:
-            # stay on this object:
-            self.arrive_at_next(next_infra, distance)
-        else:
-            # drive to next object:
-            self.drive_to_next(distance - next_infra.length)
+            # if the vehicle reaches a bridge and its broken
+            if isinstance(next_infra, Bridge) and next_infra.unique_id in self.model.broken_bridges:
+                #calculate delay if the vehicle has nto been assigned a waiting time
+                    if self.waiting_time == 0:  # only calculate delay once per vehicle
+                        self.waiting_time = next_infra.get_delay_time()
+
+
+                    # if next_infra.unique_id not in self.model.bridge_delays:
+
+                    # track the delay time for the bridge
+                    self.model.bridge_delays[next_infra.unique_id] = 0  # initialize if not present
+                    self.model.bridge_delays[next_infra.unique_id] += self.waiting_time  # accumulate delay
+
+                    # if vehicle has to wait, it stops at bridge
+                    if self.waiting_time > 0:
+                        # arrive at the bridge and wait
+                        self.arrive_at_next(next_infra, 0)
+                        self.state = Vehicle.State.WAIT
+                        #print(f"Truck {self.unique_id} waiting at {next_infra} for {self.waiting_time} mins")
+                        return
+
+            # if the next infra is long enough for the remaining travel distance
+            if next_infra.length > distance:
+                self.arrive_at_next(next_infra, distance)
+                return  # stop moving
+
+
+            # if not, substract the segment length from the distance
+            distance -= next_infra.length
 
     def arrive_at_next(self, next_infra, location_offset):
         """
@@ -301,5 +332,3 @@ class Vehicle(Agent):
         self.location.vehicle_count += 1
 
 # EOF -----------------------------------------------------------
-
-
