@@ -101,7 +101,7 @@ class BangladeshModel(Model):
         Warning: the labels are the same as the csv column labels
         """
 
-        df = pd.read_csv('../data/demo_100.csv')
+        df = pd.read_csv('../data/cleaned_data/infrastructure/roads_for_model.csv', dtype={'id':int})
 
         # a list of names of roads to be generated
         roads = ['N1']
@@ -118,21 +118,21 @@ class BangladeshModel(Model):
             # better remove sorting by id
             # Select all the objects on a particular road
 
-            df['numeric_id'] = df['id'].apply(lambda x: int(x.split('_')[1]))
-            df_objects_on_road = df[df['road'] == road].sort_values(by=['numeric_id'])
+
+           # df_objects_on_road = df[df['road'] == road].sort_values(by=['numeric_id'])
+            df_objects_on_road = df[df['road'] == road].sort_values(by=['id'])
 
             if not df_objects_on_road.empty:
                 df_objects_all.append(df_objects_on_road)
-
                 # the object IDs on a given road
                 path_ids = df_objects_on_road['id']
                 # add the path to the path_ids_dict
-                self.path_ids_dict[path_ids[0], path_ids.iloc[-1]] = path_ids
+                self.path_ids_dict[path_ids.iloc[0], path_ids.iloc[-1]] = path_ids
                 # put the path in reversed order and reindex
                 path_ids = path_ids[::-1]
                 path_ids.reset_index(inplace=True, drop=True)
                 # add the path to the path_ids_dict so that the vehicles can drive backwards too
-                self.path_ids_dict[path_ids[0], path_ids.iloc[-1]] = path_ids
+                self.path_ids_dict[path_ids.iloc[0], path_ids.iloc[-1]] = path_ids
 
         # put back to df with selected roads so that min and max and be easily calculated
         df = pd.concat(df_objects_all)

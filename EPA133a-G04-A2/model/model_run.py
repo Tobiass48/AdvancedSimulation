@@ -24,7 +24,7 @@ scenario = {
     8: {'A': 0.10, 'B': 0.20, 'C': 0.40, 'D': 0.80}
 }
 
-scenario_choice = 3
+scenario_choice = 0
 
 seed = np.random.randint(100000, 999999)
 sim_model = BangladeshModel(seed=int(seed), breakdown_probabilities=scenario, scenario=scenario_choice)
