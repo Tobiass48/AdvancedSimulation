@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cc545e08-8880-4fe2-97f0-c9f3ac770536" name="Changes" comment="Works (hopefully)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A2/model/components.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A2/model/components.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A2/model/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A2/model/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A2/model/model_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A2/model/model_run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A2/model/data_transformer.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A2/model/data_transformer.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,12 +29,12 @@
     &quot;assignee&quot;: &quot;Tobiass48&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Tobiass48/AdvancedSimulation.git",
-    "accountId": "2c3aefd6-651c-4ce6-b058-87c6961c7b11"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Tobiass48/AdvancedSimulation.git&quot;,
+    &quot;accountId&quot;: &quot;2c3aefd6-651c-4ce6-b058-87c6961c7b11&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
@@ -60,6 +58,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/audiv/PycharmProjects/AdvancedSimulation/EPA133a-G04-A2/data",
     "node.js.detected.package.eslint": "true",
