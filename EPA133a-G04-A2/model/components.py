@@ -246,7 +246,7 @@ class Vehicle(Agent):
         if self.state == Vehicle.State.WAIT:
             self.waiting_time = max(self.waiting_time - 1, 0)
 
-            self.model.total_wait_time += 1 # add 1 min to waiting time
+            self.model.total_wait_time += 1
             if self.waiting_time == 0:
                 self.waited_at = self.location
                 self.state = Vehicle.State.DRIVE
@@ -257,7 +257,7 @@ class Vehicle(Agent):
         """
         To print the vehicle trajectory at each step
         """
-        print(self)
+        #print(self)
 
     def drive(self):
 
@@ -280,47 +280,41 @@ class Vehicle(Agent):
         """
 
         while True:
-            # move to the nect infrastructure in the vehicles path
             self.location_index += 1
             next_id = self.path_ids[self.location_index]
-            next_infra = self.model.schedule._agents[next_id]
+            next_infra = self.model.schedule._agents[next_id]  # get the next infrastructure
 
-            # if the vehicle reaches sink, remove it
             if isinstance(next_infra, Sink):
                 self.arrive_at_next(next_infra, 0)
                 self.removed_at_step = self.model.schedule.steps
                 self.location.remove(self)
                 return
 
-            # if the vehicle reaches a bridge and its broken
-            if isinstance(next_infra, Bridge) and next_infra.unique_id in self.model.broken_bridges:
-                #calculate delay if the vehicle has nto been assigned a waiting time
+            elif isinstance(next_infra, Bridge):
+
+                if next_infra.unique_id in self.model.broken_bridges:
                     if self.waiting_time == 0:  # only calculate delay once per vehicle
                         self.waiting_time = next_infra.get_delay_time()
 
-
-                    # if next_infra.unique_id not in self.model.bridge_delays:
-
-                    # track the delay time for the bridge
-                    self.model.bridge_delays[next_infra.unique_id] = 0  # initialize if not present
+                    # track bridge delay in the model
+                    if next_infra.unique_id not in self.model.bridge_delays:
+                        self.model.bridge_delays[next_infra.unique_id] = 0  # initialize if not present
                     self.model.bridge_delays[next_infra.unique_id] += self.waiting_time  # accumulate delay
 
-                    # if vehicle has to wait, it stops at bridge
                     if self.waiting_time > 0:
                         # arrive at the bridge and wait
                         self.arrive_at_next(next_infra, 0)
                         self.state = Vehicle.State.WAIT
-                        #print(f"Truck {self.unique_id} waiting at {next_infra} for {self.waiting_time} mins")
                         return
 
-            # if the next infra is long enough for the remaining travel distance
             if next_infra.length > distance:
                 self.arrive_at_next(next_infra, distance)
                 return  # stop moving
 
-
-            # if not, substract the segment length from the distance
+            # susbtract distance and continue to next infrastructure
             distance -= next_infra.length
+
+
 
     def arrive_at_next(self, next_infra, location_offset):
         """

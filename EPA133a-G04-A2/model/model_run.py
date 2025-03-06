@@ -34,6 +34,6 @@ sim_model = BangladeshModel(seed=int(seed), breakdown_probabilities=scenario, sc
 for i in range(run_length):
     sim_model.step()
 
-sim_model.save_data(f'scenario{scenario_choice}_seed{seed}.csv')  # Save collected data
+sim_model.save_data(f'scenario{scenario_choice}.csv')  # Save collected data
 
 print(f"Simulation completed for scenario {scenario_choice}. Data saved.")

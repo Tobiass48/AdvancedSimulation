@@ -76,20 +76,15 @@ class BangladeshModel(Model):
 
         self.data_collector = DataCollector(
             model_reporters={
-                "Average Driving Time": lambda m: m.get_average_driving_time(),
-                "Total Delay Time": lambda m: m.get_total_delay_time(),
-                "Average Delay Time": lambda m: m.get_average_delay_time(),
-                "Broken Bridges": lambda m: m.get_broken_bridges()
-            },
-            agent_reporters={
-                "Location": lambda a: a.location.unique_id if isinstance(a, Vehicle) else None,
-                "Location Offset": lambda a: a.location_offset if isinstance(a, Vehicle) else None,
-                "State": lambda a: a.state.name if isinstance(a, Vehicle) else None,
-                "Waiting Time": lambda a: a.waiting_time if isinstance(a, Vehicle) else None,
-                "Generated At Step": lambda a: a.generated_at_step if isinstance(a, Vehicle) else None,
-                "Removed At Step": lambda a: a.removed_at_step if isinstance(a, Vehicle) else None
-            })
-
+                "Road": lambda m: 'N1',  # Hardcoded as in the manual approach
+                "Scenario": lambda m: m.scenario,  # Scenario number
+                "Seed": lambda m: m._seed,  # Store seed for reference
+                "Average_driving_time": lambda m: m.get_average_driving_time(),
+                "Total_waiting_time": lambda m: m.get_total_delay_time(),
+                "Average_waiting_time": lambda m: m.get_average_delay_time(),
+                "Broken_bridges": lambda m: ', '.join(m.get_broken_bridges())  # Convert list to string
+            }
+        )
 
 
         self.generate_model()
@@ -102,7 +97,7 @@ class BangladeshModel(Model):
         Warning: the labels are the same as the csv column labels
         """
 
-        df = pd.read_csv('../data/cleaned_data/infrastructure/roads_for_model.csv')
+        df = pd.read_csv('../data/demo_100.csv')
 
         # a list of names of roads to be generated
         roads = ['N1']
@@ -128,12 +123,12 @@ class BangladeshModel(Model):
                 # the object IDs on a given road
                 path_ids = df_objects_on_road['id']
                 # add the path to the path_ids_dict
-                self.path_ids_dict[path_ids.iloc[0], path_ids.iloc[-1]] = path_ids
+                self.path_ids_dict[path_ids[0], path_ids.iloc[-1]] = path_ids
                 # put the path in reversed order and reindex
                 path_ids = path_ids[::-1]
                 path_ids.reset_index(inplace=True, drop=True)
                 # add the path to the path_ids_dict so that the vehicles can drive backwards too
-                self.path_ids_dict[path_ids.iloc[0], path_ids.iloc[-1]] = path_ids
+                self.path_ids_dict[path_ids[0], path_ids.iloc[-1]] = path_ids
 
         # put back to df with selected roads so that min and max and be easily calculated
         df = pd.concat(df_objects_all)
@@ -210,7 +205,12 @@ class BangladeshModel(Model):
         Advance the simulation by one step.
         """
         self.schedule.step()
-        self.data_collector.collect(self)
+      #  self.data_collector.collect(self)
+
+        # Only collect data when vehicles are active (like the manual version)
+        if any(isinstance(a, Vehicle) for a in self.schedule.agents):
+            self.data_collector.collect(self)
+
 
     def get_average_driving_time(self):
         if not self.driving_times:
@@ -242,10 +242,8 @@ class BangladeshModel(Model):
         '''
         return list(self.broken_bridges)
 
-    def save_data(self, filename='scenario_from_model.csv'):
+    def save_data(self, filename='scenario_data.csv'):
         model_data = self.data_collector.get_model_vars_dataframe()
-        agent_data = self.data_collector.get_agent_vars_dataframe()
-        model_data.to_csv(filename.replace('.csv', '_model.csv'), index=False)
-        agent_data.to_csv(filename.replace('.csv', '_agents.csv'), index=False)
+        model_data.to_csv(filename, index=False, sep=';')  # Match delimiter
 
 # EOF -----------------------------------------------------------
