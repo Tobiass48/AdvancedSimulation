@@ -19,7 +19,7 @@ run_length = 5 * 24 * 60  # 7200 steps
 base_seed = 1234567
 
 # Define experiment output directory (replace xx with your group number)
-experiment_folder = "/Users/william/Downloads/EPA133a-Lab/EPA133a-G04-A2/experiment"
+experiment_folder = "../experiment"
 os.makedirs(experiment_folder, exist_ok=True)
 
 # Run experiments for scenarios 0-9, with 10 replications each
@@ -48,37 +48,3 @@ for scenario in range(9):  # Scenarios 0-8
 
 print("All experiments completed!")
 
-import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib.pyplot import boxplot, savefig
-#import seaborn as sns
-
-#%%
-
-csv_files = ['../experiment/scenario0.csv', '../experiment/scenario1.csv', '../experiment/scenario2.csv',
-             '../experiment/scenario3.csv','../experiment/scenario4.csv', '../experiment/scenario5.csv',
-             '../experiment/scenario6.csv','../experiment/scenario7.csv', '../experiment/scenario8.csv']
-
-
-data_list = []
-
-
-for file in csv_files:
-    df = pd.read_csv(file)
-
-
-    data_list.append((df['Average_Driving_Time']/60).tolist())
-
-
-plt.figure(figsize=(12, 6))
-plt.hist(data_list)
-
-
-plt.xticks(range(1, 10), [f"Scenario {i}" for i in range(9)], rotation=45)
-plt.title("Histogram of All Scenarios")
-plt.ylabel("Average driving time (hours)")
-
-savefig('../img/output.png')
-
-# Show the plot
-plt.show()
