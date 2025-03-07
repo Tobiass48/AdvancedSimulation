@@ -60,6 +60,7 @@ class Bridge(Infra):
         print(f"Bridge condition: {self.condition}")
         self.condition = condition
         self.length = length
+        print(self.length)
         self.name = name
         self.road_name = road_name
 
@@ -127,8 +128,9 @@ class Sink(Infra):
         print(str(self) + ' REMOVE ' + str(vehicle))
 
         # Store the driving time of this vehicle
-        driving_time = vehicle.removed_at_step - vehicle.generated_at_step
+        driving_time = (vehicle.removed_at_step - vehicle.generated_at_step)
         self.model.driving_times.append(driving_time)
+        print(f"✅ Driving time recorded: {driving_time} minutes for vehicle {self.unique_id}")
 
 
 # ---------------------------------------------------------------
@@ -232,7 +234,7 @@ class Vehicle(Agent):
 
     """
 
-    # 50 km/h translated into meter per min
+    # 48 km/h translated into meter per min
     speed = 48 * 1000 / 60
     # One tick represents 1 minute
     step_time = 1
@@ -256,6 +258,9 @@ class Vehicle(Agent):
         self.waiting_time = 0
         self.waited_at = None
         self.removed_at_step = None
+        print(f"Vehicle {self.unique_id} created at step {self.generated_at_step}")
+
+
 
     def __str__(self):
         return "Vehicle" + str(self.unique_id) + \
@@ -273,6 +278,8 @@ class Vehicle(Agent):
         """
         Vehicle waits or drives at each step
         """
+        print(
+            f"🔄 Vehicle {self.unique_id} at {self.location.unique_id}, state: {self.state}, index: {self.location_index}")
         if self.state == Vehicle.State.WAIT:
             self.waiting_time = max(self.waiting_time - 1, 0)
             if self.waiting_time == 0:
@@ -302,6 +309,7 @@ class Vehicle(Agent):
             # remain on the same object
             self.location_offset += distance
 
+
     def drive_to_next(self, distance):
         """
         vehicle shall move to the next object with the given distance
@@ -310,6 +318,7 @@ class Vehicle(Agent):
         self.location_index += 1
         next_id = self.path_ids[self.location_index]
         next_infra = self.model.schedule._agents[next_id]  # Access to protected member _agents
+
 
         if isinstance(next_infra, Sink):
             # arrive at the sink
@@ -324,7 +333,7 @@ class Vehicle(Agent):
                 self.arrive_at_next(next_infra, 0)
                 self.state = Vehicle.State.WAIT
                 return
-            # else, continue driving
+            #else: continue driving
 
         if next_infra.length > distance:
             # stay on this object:
@@ -342,6 +351,6 @@ class Vehicle(Agent):
         self.location_offset = location_offset
         self.location.vehicle_count += 1
 
-# EOF -----------------------------------------------------------
+
 
 

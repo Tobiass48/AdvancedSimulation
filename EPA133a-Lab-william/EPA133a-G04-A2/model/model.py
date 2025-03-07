@@ -122,6 +122,7 @@ class BangladeshModel(Model):
             # Select all the objects on a particular road
             df_objects_on_road = df[df['road'] == road].sort_values(by=['id'])
 
+
             if not df_objects_on_road.empty:
                 df_objects_all.append(df_objects_on_road)
 

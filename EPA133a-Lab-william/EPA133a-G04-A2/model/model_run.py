@@ -1,6 +1,8 @@
 from model import BangladeshModel
 import os
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 """
 Run simulation
@@ -26,7 +28,7 @@ all_results = []
 
 for scenario in range(9):  # Scenarios 0-8
     scenario_results = []
-    for replication in range(9):  # 10 replications per scenario
+    for replication in range(10):  # 10 replications per scenario
         seed = base_seed + replication  # Vary the seed for each replication
         sim_model = BangladeshModel(seed=seed, scenario_id=scenario)
 
@@ -45,3 +47,38 @@ for scenario in range(9):  # Scenarios 0-8
     print(f"Saved results to {output_file}")
 
 print("All experiments completed!")
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.pyplot import boxplot, savefig
+#import seaborn as sns
+
+#%%
+
+csv_files = ['../experiment/scenario0.csv', '../experiment/scenario1.csv', '../experiment/scenario2.csv',
+             '../experiment/scenario3.csv','../experiment/scenario4.csv', '../experiment/scenario5.csv',
+             '../experiment/scenario6.csv','../experiment/scenario7.csv', '../experiment/scenario8.csv']
+
+
+data_list = []
+
+
+for file in csv_files:
+    df = pd.read_csv(file)
+
+
+    data_list.append((df['Average_Driving_Time']/60).tolist())
+
+
+plt.figure(figsize=(12, 6))
+plt.hist(data_list)
+
+
+plt.xticks(range(1, 10), [f"Scenario {i}" for i in range(9)], rotation=45)
+plt.title("Histogram of All Scenarios")
+plt.ylabel("Average driving time (hours)")
+
+savefig('../img/output.png')
+
+# Show the plot
+plt.show()
