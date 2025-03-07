@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use("TkAgg")  # Use a compatible backend
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -24,5 +27,6 @@ plt.ylabel("Average Driving Time (hours)")
 plt.title("Bar Graph of Average Driving Time Across Scenarios")
 
 # Save and show plot
-plt.savefig('../img/output.png')
+plt.savefig('../img/output.png', dpi=300, bbox_inches='tight')
 plt.show()
+
