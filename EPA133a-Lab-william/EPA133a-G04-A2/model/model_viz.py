@@ -72,7 +72,7 @@ server = ModularServer(
     BangladeshModel,  # Model class
     [space],  # List of visualization elements
     "Transport Model Demo",  # Model title
-    {"scenario_id": 8, "seed": 1234567}  # Model parameters (fix here)
+    {"scenario_id": 8, "seed": 1234567}  # Model parameters (fix here the scenario!!!)
 )
 
 # The default port
