@@ -25,7 +25,7 @@ scenario = {
     8: {'A': 0.10, 'B': 0.20, 'C': 0.40, 'D': 0.80}
 }
 
-scenario_choice = 8
+scenario_choice = 7
 
 seed = 1234567
 #np.random.randint(100000, 999999)
