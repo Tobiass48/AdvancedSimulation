@@ -5,12 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc545e08-8880-4fe2-97f0-c9f3ac770536" name="Changes" comment="fixed lengths for roads for model">
-      <change afterPath="$PROJECT_DIR$/EPA133a-G04-A2/model/visualize_result.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A2/model/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A2/model/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A2/model/model_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A2/model/model_run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A2/model/scenario0.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A2/model/scenario1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-Gxx-A3/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-Gxx-A3/data/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/data/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-Gxx-A3/data/demo-4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/data/demo-4.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-Gxx-A3/img/N1.png" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/img/N1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-Gxx-A3/img/N1N2.png" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/img/N1N2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-Gxx-A3/img/demo-4.png" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/img/demo-4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-Gxx-A3/model/ContinuousSpace/SimpleContinuousModule.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/model/ContinuousSpace/SimpleContinuousModule.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-Gxx-A3/model/ContinuousSpace/simple_continuous_canvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/model/ContinuousSpace/simple_continuous_canvas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-Gxx-A3/model/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/model/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-Gxx-A3/model/components.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/model/components.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-Gxx-A3/model/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/model/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-Gxx-A3/model/model_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/model/model_run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-Gxx-A3/model/model_viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/model/A3 model_viz.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +42,12 @@
     &quot;assignee&quot;: &quot;Tobiass48&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Tobiass48/AdvancedSimulation.git&quot;,
-    &quot;accountId&quot;: &quot;2c3aefd6-651c-4ce6-b058-87c6961c7b11&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Tobiass48/AdvancedSimulation.git",
+    "accountId": "967d64a8-5a4b-4841-8319-b6e880264ab0"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
@@ -377,6 +385,7 @@
       <workItem from="1741253129821" duration="1953000" />
       <workItem from="1741262506051" duration="318000" />
       <workItem from="1741280895120" duration="6198000" />
+      <workItem from="1741773458929" duration="423000" />
     </task>
     <task id="LOCAL-00001" summary="Forced goede working directory jupyter notebook">
       <option name="closed" value="true" />
