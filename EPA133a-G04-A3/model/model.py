@@ -6,6 +6,7 @@ import pandas as pd
 from collections import defaultdict
 
 
+
 # ---------------------------------------------------------------
 def set_lat_lon_bound(lat_min, lat_max, lon_min, lon_max, edge_ratio=0.02):
     """
@@ -57,7 +58,29 @@ class BangladeshModel(Model):
 
     file_name = '../data/combined_n1_n2.csv'
 
-    def __init__(self, seed=None, x_max=500, y_max=500, x_min=0, y_min=0):
+    def __init__(self, scenario_id, seed=None, x_max=500, y_max=500, x_min=0, y_min=0):
+
+        super().__init__(seed, x_max, y_max, x_min, y_min)
+
+        self.scenario_id = scenario_id
+
+        # Define breakdown probabilities for different bridge categories (Cat A, B, C, D)
+        scenarios_probs = {
+            0: {"A": 0.0, "B": 0.0, "C": 0.0, "D": 0.00},
+            1: {"A": 0.0, "B": 0.0, "C": 0.0, "D": 0.05},
+            2: {"A": 0.0, "B": 0.0, "C": 0.0, "D": 0.10},
+            3: {"A": 0.0, "B": 0.0, "C": 0.05, "D": 0.10},
+            4: {"A": 0.0, "B": 0.0, "C": 0.10, "D": 0.20},
+            5: {"A": 0.0, "B": 0.05, "C": 0.10, "D": 0.20},
+            6: {"A": 0.0, "B": 0.10, "C": 0.20, "D": 0.40},
+            7: {"A": 0.05, "B": 0.10, "C": 0.20, "D": 0.40},
+            8: {"A": 0.10, "B": 0.20, "C": 0.40, "D": 0.80}
+        }
+
+        # Store breakdown probabilities for the selected scenario
+        self.breakdown_probs = scenarios_probs.get(scenario_id, {})
+        print(f"Scenario ID: {self.scenario_id}")
+        print(f"Assigned Breakdown Probabilities: {self.breakdown_probs}")
 
         self.schedule = BaseScheduler(self)
         self.running = True

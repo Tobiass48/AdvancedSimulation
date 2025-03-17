@@ -1,6 +1,6 @@
 from mesa import Agent
 from enum import Enum
-
+import random
 
 # ---------------------------------------------------------------
 class Infra(Agent):
@@ -20,12 +20,14 @@ class Infra(Agent):
     """
 
     def __init__(self, unique_id, model, length=0,
-                 name='Unknown', road_name='Unknown'):
+                 name='Unknown', road_name='Unknown', condition='Unknown'):
         super().__init__(unique_id, model)
-        self.length = length
+        self.length = length * 1000
         self.name = name
         self.road_name = road_name
         self.vehicle_count = 0
+        self.vehicle_total = 0 #counter for total amount of vehicles
+        self.condition = condition
 
     def step(self):
         pass
@@ -49,20 +51,50 @@ class Bridge(Infra):
     ...
 
     """
-
     def __init__(self, unique_id, model, length=0,
                  name='Unknown', road_name='Unknown', condition='Unknown'):
-        super().__init__(unique_id, model, length, name, road_name)
+        super().__init__(unique_id, model, length, name, road_name, condition)
 
+        print(f"Bridge condition: {self.condition}")
         self.condition = condition
+        self.length = length
+        print(self.length)
+        self.name = name
+        self.road_name = road_name
 
-        # TODO
-        self.delay_time = self.random.randrange(0, 10)
-        # print(self.delay_time)
+        # Assign breakdown probability based on bridge condition (A, B, C, D)
+        self.breakdown_prob = model.breakdown_probs.get(self.condition, 0)
+        #print(f"Bridge Condition: {self.condition}, Breakdown Probability: {self.breakdown_prob}")
 
-    # TODO
+
+        self.broken = False
+        self.delay_time = 0  # Default to no delay
+
+        # Determine if bridge breaks down based on probability
+        if random.random() < self.breakdown_prob:
+            self.broken = True
+            self.assign_delay()
+
+        print(self.delay_time)  # Debugging Output
+
+    def assign_delay(self):
+        """Assign delay time based on bridge length if broken"""
+        if self.length > 200:
+            self.delay_time = random.triangular(1, 4, 2) * 60  # Convert hours to minutes
+        elif 50 < self.length <= 200:
+            self.delay_time = random.uniform(45, 90)
+        elif 10 < self.length <= 50:
+            self.delay_time = random.uniform(15, 60)
+        else:
+            self.delay_time = random.uniform(10, 20)
+
+    def get_delay(self):
+        """Return the delay time if the bridge is broken, otherwise return 0"""
+        return self.delay_time if self.broken else 0
+
     def get_delay_time(self):
-        return self.delay_time
+        """Alias for get_delay()"""
+        return self.get_delay()
 
 
 # ---------------------------------------------------------------
