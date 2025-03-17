@@ -180,13 +180,13 @@ class BangladeshModel(Model):
                     self.space.place_agent(agent, (x, y))
                     agent.pos = (x, y)
 
-    def get_random_route(self, source):
+    def get_random_route(self, SourceSink):
         """
         pick up a random route given an origin
         """
         while True:
             # different source and sink
-            sink = self.random.choice(self.sinks)
+            sink = self.random.choice(self.sourcesink)
             if sink is not source:
                 break
         return self.path_ids_dict[source, sink]
