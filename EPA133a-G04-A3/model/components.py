@@ -244,7 +244,13 @@ class SourceSink(Infra):
             if isinstance(agent, Vehicle) and agent.location == self:
                 self.model.schedule.remove(agent)
                 self.vehicle_removed_toggle = not self.vehicle_removed_toggle
+                print(agent.removed_at_step)
+                print(agent.generated_at_step)
+                # Store the driving time of this vehicle
+                driving_time = (agent.removed_at_step - agent.generated_at_step)
+                self.model.driving_times.append(driving_time)
                 print(f"{self} REMOVE {agent}")
+                print(f"✅ Driving time recorded: {driving_time} minutes for vehicle {agent.unique_id}")
 
 
 # ---------------------------------------------------------------

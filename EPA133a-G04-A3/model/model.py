@@ -86,10 +86,18 @@ class BangladeshModel(Model):
         self.running = True
         self.path_ids_dict = defaultdict(lambda: pd.Series())
         self.space = None
-        self.sources = []
-        self.sinks = []
-
+        self.sourcesink = []
+        # self.sinks = []
+        self.driving_times = [] #generate empty list of driving times
         self.generate_model()
+
+    def get_average_driving_time(self):
+        """
+        Calculate the average driving time for all trucks in the model.
+        """
+        if not self.driving_times:
+            return 0
+        return sum(self.driving_times) / len(self.driving_times)
 
     def generate_model(self):
         """
@@ -163,8 +171,8 @@ class BangladeshModel(Model):
                     self.sinks.append(agent.unique_id)
                 elif model_type == 'sourcesink':
                     agent = SourceSink(row['id'], self, row['length'], name, row['road'])
-                    self.sources.append(agent.unique_id)
-                    self.sinks.append(agent.unique_id)
+                    self.sourcesink.append(agent.unique_id)
+                    # self.sinks.append(agent.unique_id)
                 elif model_type == 'bridge':
                     agent = Bridge(row['id'], self, row['length'], name, row['road'], row['condition'])
                 elif model_type == 'link':
@@ -180,7 +188,7 @@ class BangladeshModel(Model):
                     self.space.place_agent(agent, (x, y))
                     agent.pos = (x, y)
 
-    def get_random_route(self, SourceSink):
+    def get_random_route(self, source):
         """
         pick up a random route given an origin
         """
@@ -193,7 +201,7 @@ class BangladeshModel(Model):
 
     # TODO
     def get_route(self, source):
-        return self.get_straight_route(source)
+        return self.get_random_route(source)
 
     def get_straight_route(self, source):
         """
