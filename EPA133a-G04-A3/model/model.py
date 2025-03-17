@@ -87,7 +87,7 @@ class BangladeshModel(Model):
         self.path_ids_dict = defaultdict(lambda: pd.Series())
         self.space = None
         self.sourcesink = []
-        # self.sinks = []
+        self.sinks = []
         self.driving_times = [] #generate empty list of driving times
         self.generate_model()
 

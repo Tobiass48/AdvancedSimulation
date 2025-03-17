@@ -1,8 +1,7 @@
 from model import BangladeshModel
 import os
 import pandas as pd
-import seaborn as sns
-import random
+
 
 """
     Run simulation

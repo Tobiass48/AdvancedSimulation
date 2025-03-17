@@ -320,7 +320,7 @@ class Vehicle(Agent):
         self.location_index = 0
         self.waiting_time = 0
         self.waited_at = None
-        self.removed_at_step = None
+        self.removed_at_step = 0
 
     def __str__(self):
         return "Vehicle" + str(self.unique_id) + \
