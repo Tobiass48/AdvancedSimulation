@@ -218,7 +218,7 @@ class BangladeshModel(Model):
                     x = row['lon']
                     self.space.place_agent(agent, (x, y))
                     agent.pos = (x, y)
-                    added_agent_ids.add(agent.unique_id)  # Mark this ID as added
+                    # added_agent_ids.add(agent.unique_id)  # Mark this ID as added
                     self.space.place_agent(agent, (row['lat'], row['lon']))
                     agent.pos = (row['lat'], row['lon'])
 
@@ -233,7 +233,6 @@ class BangladeshModel(Model):
                 break
         return self.path_ids_dict[source, sink]
 
-    # TODO
     def get_route(self, source_id):
         # 1. Pick a sink or a random destination
         sink = self.get_random_route(source_id)
