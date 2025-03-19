@@ -219,38 +219,48 @@ class SourceSink(Infra):
 
     def generate_truck(self):
         """
-        Generates a truck, sets its path, increases the global and local counters.
+        Generates a truck, sets its path, and ensures no duplicate truck IDs.
         """
         try:
-            truck_id = 'Truck' + str(SourceSink.truck_counter)
-            agent = Vehicle(truck_id, self.model, self)
+            truck_id = f"Truck{SourceSink.truck_counter}"
 
-            if agent:
-                self.model.schedule.add(agent)
-                agent.set_path()
-                SourceSink.truck_counter += 1
-                self.vehicle_count += 1
-                self.vehicle_generated_flag = True
-                print(f"{self} GENERATE {agent}")
+            # Ensure ID is unique
+            if truck_id in self.model.schedule._agents:
+                print(f"⚠️ Warning: Truck ID {truck_id} already exists. Skipping creation.")
+                return
+
+            # Create and add truck
+            agent = Vehicle(truck_id, self.model, self)
+            self.model.schedule.add(agent)
+            agent.set_path()
+            SourceSink.truck_counter += 1
+            self.vehicle_count += 1
+            self.vehicle_generated_flag = True
+            print(f"{self} ✅ GENERATED {agent}")
 
         except Exception as e:
-            print(f"Error generating truck: {e}")
+            print(f"❌ Error generating truck: {e}")
 
     def remove_truck(self):
         """
-        Removes a truck from the simulation when it reaches the destination.
+        Removes a truck safely and records its driving time.
         """
-        for agent in list(self.model.schedule.agents):
-            if isinstance(agent, Vehicle) and agent.location == self:
-                self.model.schedule.remove(agent)
-                self.vehicle_removed_toggle = not self.vehicle_removed_toggle
-                print(agent.removed_at_step)
-                print(agent.generated_at_step)
-                # Store the driving time of this vehicle
-                driving_time = (agent.removed_at_step - agent.generated_at_step)
-                self.model.driving_times.append(driving_time)
-                print(f"{self} REMOVE {agent}")
-                print(f"✅ Driving time recorded: {driving_time} minutes for vehicle {agent.unique_id}")
+        try:
+            for agent in list(self.model.schedule.agents):
+                if isinstance(agent, Vehicle) and agent.location == self:
+                    self.model.schedule.remove(agent)
+                    self.vehicle_removed_toggle = not self.vehicle_removed_toggle
+
+                    # Ensure attributes exist before computing driving time
+                    if hasattr(agent, "removed_at_step") and hasattr(agent, "generated_at_step"):
+                        driving_time = agent.removed_at_step - agent.generated_at_step
+                        self.model.driving_times.append(driving_time)
+                        print(f"{self} ✅ REMOVED {agent} | Driving Time: {driving_time} minutes")
+                    else:
+                        print(f"⚠️ Warning: Missing timestamps for {agent}")
+
+        except Exception as e:
+            print(f"❌ Error removing truck: {e}")
 
 
 # ---------------------------------------------------------------

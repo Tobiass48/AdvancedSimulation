@@ -25,14 +25,15 @@ os.makedirs(experiment_folder, exist_ok=True)
 # Run experiments for scenarios 0-9, with 10 replications each
 data_columns = ["Scenario", "Replication", "Average_Driving_Time"]
 all_results = []
+# global_id_counter = 0
 
 for scenario in range(9):  # Scenarios 0-8
     scenario_results = []
     for replication in range(10):  # 10 replications per scenario
         seed = base_seed + replication  # Vary the seed for each replication
         sim_model = BangladeshModel(seed=seed, scenario_id=scenario)
+        # global_id_counter += 1  # Increment counter to keep unique IDs globally
 
-        # Run simulation
         for i in range(run_length):
             sim_model.step()
 
