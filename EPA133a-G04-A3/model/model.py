@@ -107,7 +107,7 @@ class BangladeshModel(Model):
         Warning: the labels are the same as the csv column labels
         """
 
-        df = pd.read_csv('../data/demo-4.csv')
+        df = pd.read_csv('../data/final_n1_n2.csv')
         roads = df['road'].unique().tolist()
 
         G = nx.Graph()
@@ -262,4 +262,3 @@ class BangladeshModel(Model):
         """
         self.schedule.step()
 
-# EOF -----------------------------------------------------------
