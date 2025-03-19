@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cc545e08-8880-4fe2-97f0-c9f3ac770536" name="Changes" comment="fixed lengths for roads for model">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A3/data/bridges_n1_n2_filtered.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A3/data/bridges_test_filtered.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A3/data/data_transformer.ipynb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/EPA133a-G04-A3/data/data_transformer2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/data/data_transformer2.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A3/data/roads_n1_n2_filtered.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A3/data/roads_test_filtered.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A3/data/test_n1_n2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A3/model/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/model/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A3/data/final_n1_n2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/data/final_n1_n2.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -347,7 +341,8 @@
       <workItem from="1742225381609" duration="5071000" />
       <workItem from="1742314978593" duration="317000" />
       <workItem from="1742378873854" duration="3744000" />
-      <workItem from="1742382713327" duration="7614000" />
+      <workItem from="1742382713327" duration="7686000" />
+      <workItem from="1742396783051" duration="464000" />
     </task>
     <task id="LOCAL-00001" summary="Forced goede working directory jupyter notebook">
       <option name="closed" value="true" />
