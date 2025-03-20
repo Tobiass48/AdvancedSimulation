@@ -57,7 +57,7 @@ class BangladeshModel(Model):
 
     step_time = 1
 
-    # file_name = '../data/combined_n1_n2.csv'
+    # file_name = '../data/demo-4.csv'
 
     def __init__(self, scenario_id, seed=None, x_max=500, y_max=500, x_min=0, y_min=0):
 
@@ -90,6 +90,7 @@ class BangladeshModel(Model):
         self.sourcesink = []
         # self.sinks = []
         self.driving_times = [] #generate empty list of driving times
+        self.network_graph = nx.Graph()
         self.generate_model()
 
     def get_average_driving_time(self):
@@ -107,35 +108,26 @@ class BangladeshModel(Model):
         Warning: the labels are the same as the csv column labels
         """
 
-        df = pd.read_csv('../data/final_n1_n2.csv')
+        df = pd.read_csv('../data/demo-4.csv')
         roads = df['road'].unique().tolist()
-
-        G = nx.Graph()
-
         # Filter nodes: keep only 'intersection' and 'sourcesink'
-        nodes_df = df[df["model_type"].isin(["intersection", "sourcesink"])]
-
-        # Add nodes to the graph
-        for _, row in nodes_df.iterrows():
+        for _, row in df.iterrows():
             node_id = row["id"]
-            G.add_node(node_id, pos=(row["lat"], row["lon"]), road=row["road"], model_type=row["model_type"])
+            self.network_graph.add_node(node_id, pos=(row["lat"], row["lon"]), road=row["road"], model_type=row["model_type"])
 
-        # Add edges (connect nodes within the same road)
-        for road in nodes_df["road"].unique():
-            road_nodes = nodes_df[nodes_df["road"] == road].sort_values(by="id")["id"].tolist()  # Sort by ID to maintain order
+        # ✅ Add edges (connect all objects on the same road)
+        for road in df["road"].unique():
+            road_nodes = df[df["road"] == road].sort_values(by="id")[["id", "length"]].values
 
             for i in range(len(road_nodes) - 1):
-                start_node = road_nodes[i]
-                end_node = road_nodes[i + 1]
+                start_node, start_length = road_nodes[i]
+                end_node, end_length = road_nodes[i + 1]
 
-        # Sum the 'length' of all road elements between start_node and end_node
-                segment_length = df[(df["road"] == road) &
-                                    (df["id"] >= start_node) &
-                                    (df["id"] <= end_node)]["length"].sum()
+                # ✅ Use the summed length of road elements as edge weights
+                segment_length = start_length + end_length  # Sum lengths
+                self.network_graph.add_edge(start_node, end_node, weight=segment_length)
 
-                G.add_edge(start_node, end_node, weight=segment_length)
-
-        print(f"Graph created with {G.number_of_nodes()} nodes and {G.number_of_edges()} edges.")
+        print(f"Graph created with {self.network_graph.number_of_nodes()} nodes and {self.network_graph.number_of_edges()} edges.")
 
         df_objects_all = []
         for road in roads:
@@ -242,12 +234,12 @@ class BangladeshModel(Model):
             return self.path_ids_dict[(source_id, sink_id)]
 
         # 3. If not, compute the shortest path using NetworkX
-        shortest_path = nx.shortest_path(G, source=source_id, target=sink_id)
-
+        shortest_path = nx.shortest_path(self.network_graph, source=source_id, target=sink_id, weight="weight")
+        print(f"Shortest path from {source_id} to {sink_id}: {shortest_path}")
         # 4. Save the route in path_ids_dict
         self.path_ids_dict[(source_id, sink_id)] = shortest_path
 
-        return shortest_path
+        return pd.Series(shortest_path)
 
 
     def get_straight_route(self, source):

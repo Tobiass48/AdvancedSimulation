@@ -236,7 +236,7 @@ class SourceSink(Infra):
             SourceSink.truck_counter += 1
             self.vehicle_count += 1
             self.vehicle_generated_flag = True
-            print(f"{self} ✅ GENERATED {agent}")
+            # print(f"{self} ✅ GENERATED {agent}")
 
         except Exception as e:
             print(f"❌ Error generating truck: {e}")
@@ -255,7 +255,7 @@ class SourceSink(Infra):
                     if hasattr(agent, "removed_at_step") and hasattr(agent, "generated_at_step"):
                         driving_time = agent.removed_at_step - agent.generated_at_step
                         self.model.driving_times.append(driving_time)
-                        print(f"{self} ✅ REMOVED {agent} | Driving Time: {driving_time} minutes")
+                        # print(f"{self} ✅ REMOVED {agent} | Driving Time: {driving_time} minutes")
                     else:
                         print(f"⚠️ Warning: Missing timestamps for {agent}")
 

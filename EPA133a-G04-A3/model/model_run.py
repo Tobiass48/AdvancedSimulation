@@ -30,7 +30,7 @@ all_results = []
 
 for scenario in range(9):  # Scenarios 0-8
     scenario_results = []
-    for replication in range(10):  # 10 replications per scenario
+    for replication in range(1):  # 10 replications per scenario
         seed = base_seed + replication  # Vary the seed for each replication
         sim_model = BangladeshModel(seed=seed, scenario_id=scenario)
         # global_id_counter += 1  # Increment counter to keep unique IDs globally
@@ -39,7 +39,7 @@ for scenario in range(9):  # Scenarios 0-8
             sim_model.step()
 
         # Gather average driving time
-        avg_driving_time = sim_model.get_average_driving_time()
+        avg_driving_time = abs(sim_model.get_average_driving_time())
         scenario_results.append([scenario, replication, avg_driving_time])
 
     # Save results for this scenario
