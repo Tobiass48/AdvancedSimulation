@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc545e08-8880-4fe2-97f0-c9f3ac770536" name="Changes" comment="fixed lengths for roads for model">
+      <change afterPath="$PROJECT_DIR$/EPA133a-G04-A3/model/visualize_result.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A3/model/model_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/model/model_run.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +63,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/domho/OneDrive/Documents/GitHub/AdvancedSimulation",
+    "last_opened_file_path": "C:/Users/audiv/PycharmProjects/AdvancedSimulation/EPA133a-G04-A3/model",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -75,6 +75,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\audiv\PycharmProjects\AdvancedSimulation\EPA133a-G04-A3\model" />
       <recent name="C:\Users\audiv\PycharmProjects\AdvancedSimulation\EPA133a-G04-A2\data" />
       <recent name="C:\Users\audiv\Desktop\EPA133A\EPA133a-Lab_william\EPA133a-Gxx-A2\data" />
     </key>
@@ -84,30 +85,7 @@
       <recent name="C:\Users\tobia\Documents\GitHub\AdvancedSimulation\Assignment 1" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.model_run (1)">
-    <configuration name="A2 model_viz" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AdvancedSimulation" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/EPA133a-G04-A2/model" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EPA133a-G04-A2/model/A2 model_viz.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.visualize_result (1)">
     <configuration name="A3 model_viz" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AdvancedSimulation" />
       <option name="ENV_FILES" value="" />
@@ -146,29 +124,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EPA133a-G04-A3/model/model.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AdvancedSimulation" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/EPA133a-G04-A2/model" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EPA133a-G04-A2/model/model.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -223,7 +178,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="model_run" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="visualize_result (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AdvancedSimulation" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -232,12 +187,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/EPA133a-G04-A2/model" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/EPA133a-G04-A3/model" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EPA133a-G04-A2/model/model_run.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EPA133a-G04-A3/model/visualize_result.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -270,21 +225,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.A2 model_viz" />
-      <item itemvalue="Python.model" />
+      <item itemvalue="Python.visualize_result (1)" />
       <item itemvalue="Python.model (1)" />
       <item itemvalue="Python.model_run (1)" />
       <item itemvalue="Python.A3 model_viz" />
-      <item itemvalue="Python.model_run" />
       <item itemvalue="Python.visualize_result" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.visualize_result (1)" />
         <item itemvalue="Python.model_run (1)" />
         <item itemvalue="Python.A3 model_viz" />
         <item itemvalue="Python.model (1)" />
         <item itemvalue="Python.visualize_result" />
-        <item itemvalue="Python.model_run" />
       </list>
     </recent_temporary>
   </component>
@@ -343,6 +296,7 @@
       <workItem from="1742382713327" duration="7686000" />
       <workItem from="1742396783051" duration="464000" />
       <workItem from="1742502712413" duration="5804000" />
+      <workItem from="1742570185427" duration="1486000" />
     </task>
     <task id="LOCAL-00001" summary="Forced goede working directory jupyter notebook">
       <option name="closed" value="true" />
