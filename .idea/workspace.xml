@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cc545e08-8880-4fe2-97f0-c9f3ac770536" name="Changes" comment="fixed lengths for roads for model">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EPA133a-G04-A3/data/bridges_filtered.csv" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/data/bridges_filtered.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EPA133a-G04-A3/data/data_transformer2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/data/data_transformer2.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EPA133a-G04-A3/data/final_n1_n2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/EPA133a-G04-A3/data/final_n1_n2.csv" afterDir="false" />
     </list>
@@ -46,34 +47,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.A2 model_viz (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.A2 model_viz.executor&quot;: &quot;Run&quot;,
-    &quot;Python.A3 model_viz.executor&quot;: &quot;Run&quot;,
-    &quot;Python.components.executor&quot;: &quot;Run&quot;,
-    &quot;Python.data_loader.executor&quot;: &quot;Run&quot;,
-    &quot;Python.model (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.model.executor&quot;: &quot;Run&quot;,
-    &quot;Python.model_run (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.model_run.executor&quot;: &quot;Run&quot;,
-    &quot;Python.model_viz.executor&quot;: &quot;Run&quot;,
-    &quot;Python.visualize_result.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/domho/OneDrive/Documents/GitHub/AdvancedSimulation&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.A2 model_viz (1).executor": "Run",
+    "Python.A2 model_viz.executor": "Run",
+    "Python.A3 model_viz.executor": "Run",
+    "Python.components.executor": "Run",
+    "Python.data_loader.executor": "Run",
+    "Python.model (1).executor": "Run",
+    "Python.model.executor": "Run",
+    "Python.model_run (1).executor": "Run",
+    "Python.model_run.executor": "Run",
+    "Python.model_viz.executor": "Run",
+    "Python.visualize_result.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "git-widget-placeholder": "Tobias",
+    "last_opened_file_path": "C:/Users/domho/OneDrive/Documents/GitHub/AdvancedSimulation",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\audiv\PycharmProjects\AdvancedSimulation\EPA133a-G04-A2\data" />
@@ -343,6 +344,7 @@
       <workItem from="1742378873854" duration="3744000" />
       <workItem from="1742382713327" duration="7686000" />
       <workItem from="1742396783051" duration="464000" />
+      <workItem from="1742502712413" duration="5804000" />
     </task>
     <task id="LOCAL-00001" summary="Forced goede working directory jupyter notebook">
       <option name="closed" value="true" />
