@@ -4,8 +4,11 @@ from mesa.space import ContinuousSpace
 from components import Source, Sink, SourceSink, Bridge, Link, Intersection
 import pandas as pd
 from collections import defaultdict
+import networkx as nx
+import sys
 
-
+print(sys.getrecursionlimit())
+sys.setrecursionlimit(10000)
 
 # ---------------------------------------------------------------
 def set_lat_lon_bound(lat_min, lat_max, lon_min, lon_max, edge_ratio=0.02):
@@ -56,15 +59,11 @@ class BangladeshModel(Model):
 
     step_time = 1
 
-    file_name = '../data/combined_n1_n2.csv'
+    file_name = '../data/bridges_intersected_linked.csv'
 
-    def __init__(self, scenario_id, seed=None, x_max=500, y_max=500, x_min=0, y_min=0):
-
-        super().__init__(seed, x_max, y_max, x_min, y_min)
-
+    def __init__(self,scenario_id, seed=None, x_max=500, y_max=500, x_min=0, y_min=0):
         self.scenario_id = scenario_id
 
-        # Define breakdown probabilities for different bridge categories (Cat A, B, C, D)
         scenarios_probs = {
             0: {"A": 0.0, "B": 0.0, "C": 0.0, "D": 0.00},
             1: {"A": 0.0, "B": 0.0, "C": 0.0, "D": 0.05},
@@ -79,16 +78,14 @@ class BangladeshModel(Model):
 
         # Store breakdown probabilities for the selected scenario
         self.breakdown_probs = scenarios_probs.get(scenario_id, {})
-        print(f"Scenario ID: {self.scenario_id}")
-        print(f"Assigned Breakdown Probabilities: {self.breakdown_probs}")
-
         self.schedule = BaseScheduler(self)
         self.running = True
         self.path_ids_dict = defaultdict(lambda: pd.Series())
         self.space = None
-        self.sourcesink = []
-        # self.sinks = []
-        self.driving_times = [] #generate empty list of driving times
+        self.sources = []
+        self.sinks = []
+        self.driving_times = []
+        self.network_graph = nx.DiGraph()
         self.generate_model()
 
     def get_average_driving_time(self):
@@ -107,6 +104,25 @@ class BangladeshModel(Model):
         """
 
         df = pd.read_csv(self.file_name)
+        roads = df['road'].unique().tolist()
+        # Filter nodes: keep only 'intersection' and 'sourcesink'
+        for _, row in df.iterrows():
+            node_id = row["id"]
+            self.network_graph.add_node(node_id, pos=(row["lat"], row["lon"]), road=row["road"], model_type=row["model_type"])
+
+        # ✅ Add edges (connect all objects on the same road)
+        for road in df["road"].unique():
+            road_nodes = df[df["road"] == road].sort_values(by="id")[["id", "length"]].values
+
+            for i in range(len(road_nodes) - 1):
+                start_node, start_length = road_nodes[i]
+                end_node, end_length = road_nodes[i + 1]
+
+                # ✅ Use the summed length of road elements as edge weights
+                segment_length = start_length + end_length  # Sum lengths
+                self.network_graph.add_edge(start_node, end_node, weight=segment_length)
+
+        print(f"Graph created with {self.network_graph.number_of_nodes()} nodes and {self.network_graph.number_of_edges()} edges.")
 
         # a list of names of roads to be generated
         # TODO You can also read in the road column to generate this list automatically
@@ -171,8 +187,8 @@ class BangladeshModel(Model):
                     self.sinks.append(agent.unique_id)
                 elif model_type == 'sourcesink':
                     agent = SourceSink(row['id'], self, row['length'], name, row['road'])
-                    self.sourcesink.append(agent.unique_id)
-                    # self.sinks.append(agent.unique_id)
+                    self.sources.append(agent.unique_id)
+                    self.sinks.append(agent.unique_id)
                 elif model_type == 'bridge':
                     agent = Bridge(row['id'], self, row['length'], name, row['road'], row['condition'])
                 elif model_type == 'link':
@@ -194,14 +210,26 @@ class BangladeshModel(Model):
         """
         while True:
             # different source and sink
-            sink = self.random.choice(self.sourcesink)
+            sink = self.random.choice(self.sinks)
             if sink is not source:
                 break
-        return self.path_ids_dict[source, sink]
+        return sink
 
-    # TODO
-    def get_route(self, source):
-        return self.get_random_route(source)
+    def get_route(self, source_id):
+        # 1. Pick a sink or a random destination
+        sink = self.get_random_route(source_id)
+        sink_id = next((sink for (src, sink) in self.path_ids_dict.keys() if src == source_id), None)
+        # 2. Check if (source_id, sink_id) is in path_ids_dict
+        if (source_id, sink_id) in self.path_ids_dict:
+            return self.path_ids_dict[(source_id, sink_id)]
+
+        # 3. If not, compute the shortest path using NetworkX
+        shortest_path = nx.shortest_path(self.network_graph, source=source_id, target=sink_id, weight="weight")
+        print(f"Shortest path from {source_id} to {sink_id}: {shortest_path}")
+        # 4. Save the route in path_ids_dict
+        self.path_ids_dict[(source_id, sink_id)] = shortest_path
+
+        return pd.Series(shortest_path)
 
     def get_straight_route(self, source):
         """
