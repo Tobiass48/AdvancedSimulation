@@ -29,25 +29,25 @@ os.makedirs(experiment_folder, exist_ok=True)
 data_columns = ["Scenario", "Replication", "Average_Driving_Time"]
 all_results = []
 # global_id_counter = 0
-scenario_results = []
-scenario = 2
-for replication in range(5):  # 10 replications per scenario
-    seed = base_seed + replication  # Vary the seed for each replication
-    sim_model = BangladeshModel(seed=seed, scenario_id=scenario)
+for scenario in [5]:  # Scenarios 0-8
+    scenario_results = []
+    for replication in range(10):  # 10 replications per scenario
+        seed = base_seed + replication  # Vary the seed for each replication
+        sim_model = BangladeshModel(seed=seed, scenario_id=scenario)
         # global_id_counter += 1  # Increment counter to keep unique IDs globally
 
-    for i in range(run_length):
-        sim_model.step()
+        for i in range(run_length):
+            sim_model.step()
 
         # Gather average driving time
-    avg_driving_time = abs(sim_model.get_average_driving_time())
-    scenario_results.append([scenario, replication, avg_driving_time])
+        avg_driving_time = abs(sim_model.get_average_driving_time())
+        scenario_results.append([scenario, replication, avg_driving_time])
 
     # Save results for this scenario
-df = pd.DataFrame(scenario_results, columns=data_columns)
-output_file = os.path.join(experiment_folder, f"scenario{scenario}.csv")
-df.to_csv(output_file, index=False)
-print(f"Saved results to {output_file}")
+    df = pd.DataFrame(scenario_results, columns=data_columns)
+    output_file = os.path.join(experiment_folder, f"scenario{scenario}.csv")
+    df.to_csv(output_file, index=False)
+    print(f"Saved results to {output_file}")
 
 print(f"Saved results to {output_file}")
 print("All experiments completed!")
