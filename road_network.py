@@ -6,6 +6,14 @@ import numpy as np
 # Read the CSV file
 df = pd.read_csv('EPA133a-G04-A4/model/gdf_roads.csv')
 
+
+traffic_columns = ["Traffic Data-Heavy Truck", "Traffic Data-Small Truck", "Traffic Data-Medium Truck", "Total-Total AADT"]
+for column in traffic_columns:
+    df[column] = pd.to_numeric(df[column], errors='coerce')
+
+df["weight"] = (df["Traffic Data-Heavy Truck"] + df["Traffic Data-Small Truck"] + df["Traffic Data-Medium Truck"]) / df[
+    "Total-Total AADT"]
+
 # Create a directed graph
 G = nx.DiGraph()
 
@@ -56,7 +64,7 @@ for _, row in df.iterrows():
 
 def calculate_criticality_metrics():
     # 1. Calculate betweenness centrality for edges
-    edge_betweenness = nx.edge_betweenness_centrality(G, normalized=True)
+    edge_betweenness = nx.edge_betweenness_centrality(G,weight="weight" normalized=True)
     
     # 2. Calculate alternative paths (redundancy)
     redundancy = {}
