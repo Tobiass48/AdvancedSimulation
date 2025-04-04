@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cc545e08-8880-4fe2-97f0-c9f3ac770536" name="Changes" comment="fixed lengths for roads for model">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/road_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/road_network.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +16,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Jupyter Notebook" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -274,7 +275,7 @@
       <workItem from="1742396783051" duration="464000" />
       <workItem from="1742502712413" duration="5804000" />
       <workItem from="1742570185427" duration="1486000" />
-      <workItem from="1743492046224" duration="712000" />
+      <workItem from="1743492046224" duration="2295000" />
     </task>
     <task id="LOCAL-00001" summary="Forced goede working directory jupyter notebook">
       <option name="closed" value="true" />
@@ -344,6 +345,7 @@
     <SUITE FILE_PATH="coverage/AdvancedSimulation$components.coverage" NAME="components Coverage Results" MODIFIED="1741194644735" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-G04-A2/model" />
     <SUITE FILE_PATH="coverage/AdvancedSimulation$model__1_.coverage" NAME="model (1) Coverage Results" MODIFIED="1742203863989" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-G04-A3/model" />
     <SUITE FILE_PATH="coverage/AdvancedSimulation$model_run.coverage" NAME="model_run Coverage Results" MODIFIED="1741301409144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-G04-A2/model" />
+    <SUITE FILE_PATH="coverage/AdvancedSimulation$road_network.coverage" NAME="road_network Coverage Results" MODIFIED="1743493926607" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AdvancedSimulation$model_viz.coverage" NAME="model_viz Coverage Results" MODIFIED="1741195955167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-Lab_william/EPA133a-Gxx-A2/model" />
     <SUITE FILE_PATH="coverage/AdvancedSimulation$A2_model_viz__1_.coverage" NAME="A2 model_viz (1) Coverage Results" MODIFIED="1741171229121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-G04-A2/model" />
     <SUITE FILE_PATH="coverage/AdvancedSimulation$model.coverage" NAME="model Coverage Results" MODIFIED="1741171973166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/EPA133a-G04-A2/model" />
